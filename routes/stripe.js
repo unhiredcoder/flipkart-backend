@@ -4,6 +4,8 @@ import express from 'express';
 import cors from 'cors';
 dotenv.config();
 const STRIPE_KEY = process.env.STRIPE_KEY;
+const success_url = process.env.FRONT_PAY_SUCCESS_URL;
+const Failed_url = process.env.FRONT_PAY_FAILED_URL;
 const stripe = Stripe(STRIPE_KEY);
 const app = express();
 app.use(cors());
@@ -50,8 +52,8 @@ export const checkout = async (req, res) => {
             payment_method_types: ["card"],
             line_items: lineItems,
             mode: "payment",
-            success_url: "http://localhost:5173/success",
-            cancel_url: "http://localhost:5173/success",
+            success_url: success_url,
+            cancel_url: Failed_url,
             customer_email: user.email, // Add the customer's email to the session data
             client_reference_id: user.firstname, // Add the customer's name to the session data
             shipping_address_collection: {
