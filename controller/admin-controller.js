@@ -1,6 +1,10 @@
 import Product from "../modal/product-schema.js"
 import User from "../modal/user-schema.js";
 import crypto from 'crypto'
+import dotenv from "dotenv";
+dotenv.config();
+
+
 export async function getAllusers(req, res) {
   try {
     let users = await User.find({}); // Assuming User.find() returns an array of users
