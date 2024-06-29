@@ -24,7 +24,7 @@ export async function updateUserRole(req, res) {
   const { selectedUserId } = req.params;
   const { password, newRole } = req.body;
   const hashedPassword = generateHashPassword();
-
+console.log("This is pass generated",hashedPassword)
   // Check if the provided password matches the superadmin password
   if (password === hashedPassword) {
     // Get the user's current role
