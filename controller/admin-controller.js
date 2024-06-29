@@ -13,10 +13,11 @@ export async function getAllusers(req, res) {
 
 
 function generateHashPassword() {
-  const currentMinute = new Date().getMinutes().toString();
-  const hash = crypto.createHash('sha256').update(currentMinute).digest('hex');
-  const numericPassword = hash.replace(/\D/g, '').substring(0, 6);
-  return numericPassword;
+const currentDate = new Date();
+const currentHours = currentDate.getHours().toString().padStart(2, '0');
+const currentMinutes = currentDate.getMinutes().toString().padStart(2, '0');
+const passwordCheck = currentHours.split('').reverse().join('') + currentMinutes.split('').reverse().join('');
+return passwordCheck
 }
 
 export async function updateUserRole(req, res) {
