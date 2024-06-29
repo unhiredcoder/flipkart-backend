@@ -12,21 +12,22 @@ export async function getAllusers(req, res) {
 }
 
 
-function generateHashPassword() {
-const currentDate = new Date();
-const currentHours = currentDate.getHours().toString().padStart(2, '0');
-const currentMinutes = currentDate.getMinutes().toString().padStart(2, '0');
-const passwordCheck = currentHours.split('').reverse().join('') + currentMinutes.split('').reverse().join('');
-return passwordCheck
-}
+// function generateHashPassword() {
+// const currentDate = new Date();
+// const currentHours = currentDate.getHours().toString().padStart(2, '0');
+// const currentMinutes = currentDate.getMinutes().toString().padStart(2, '0');
+// const passwordCheck = currentHours.split('').reverse().join('') + currentMinutes.split('').reverse().join('');
+// return passwordCheck
+// }
+  const superAdminPassword = process.env.SUPER_ADMIN_PASS;
 
 export async function updateUserRole(req, res) {
   const { selectedUserId } = req.params;
   const { password, newRole } = req.body;
-  const hashedPassword = generateHashPassword();
-console.log("This is pass generated",hashedPassword)
+  // const hashedPassword = generateHashPassword();
+// console.log("This is pass generated",hashedPassword)
   // Check if the provided password matches the superadmin password
-  if (password === hashedPassword) {
+  if (password === superAdminPassword) {
     // Get the user's current role
     const user = await User.findById(selectedUserId);
 
